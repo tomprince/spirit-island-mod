@@ -3286,125 +3286,129 @@ function resetPiece(object, rotation, depth)
     return object
 end
 ------
+-- posOrigin is the base position for placing the island boards.
+-- The tables below include positions relative to this, in order to
+-- allow scaling the board layouts.
+posOrigin = Vector(5.96, 1.08, 16.59)
 posMap = { -- This order should exactly match alternateSetupNames table
-    { -- 1 player
+    { -- 1 Player
         { -- Standard
-            Vector(5.96, 1.08, 16.59),
+            Vector(0.00, 0.00, 0.00),
         },
     },
     { -- 2 Player
         { -- Standard
-            Vector(12.23, 1.08, 24.28),
-            Vector(1.96, 1.08, 9.41),
+            Vector(6.27, 0.00, 7.69),
+            Vector(-4.00, 0.00, -7.18),
         },
         { -- Fragment
-            Vector(1.96, 1.08, 9.41),
-            Vector(16.37, 1.08, 16.17),
+            Vector(-4.00, 0.00, -7.18),
+            Vector(10.41, 0.00, -0.42),
         },
         { -- Opposite Shores
-            Vector(1.85, 1.08, 14.44),
-            Vector(20.21, 1.08, 12.85),
+            Vector(-4.11, 0.00, -2.15),
+            Vector(14.25, 0.00, -3.74),
         },
     },
     { -- 3 Player
         { -- Standard
-            Vector(7.97, 1.08, 25.75),
-            Vector(21.40, 1.08, 17.17),
-            Vector(7.29, 1.08, 9.84),
+            Vector(2.01, 0.00, 9.16),
+            Vector(15.44, 0.00, 0.58),
+            Vector(1.33, 0.00, -6.75),
         },
         { -- Coastline
-            Vector(1.70, 1.08, 8.28),
-            Vector(19.90, 1.08, 8.21),
-            Vector(38.16, 1.08, 8.13),
+            Vector(-4.26, 0.00, -8.31),
+            Vector(13.94, 0.00, -8.38),
+            Vector(32.20, 0.00, -8.46),
         },
         { -- Sunrise
-            Vector(2.63, 1.08, 9.58),
-            Vector(17.07, 1.08, 16.13),
-            Vector(30.03, 1.08, 6.86),
+            Vector(-3.33, 0.00, -7.01),
+            Vector(11.11, 0.00, -0.46),
+            Vector(24.07, 0.00, -9.73),
         },
     },
     { -- 4 Player
         { -- Standard
-            Vector(6.20, 1.08, 24.40),
-            Vector(24.70, 1.08, 22.66),
-            Vector(14.19, 1.08, 7.71),
-            Vector(-4.30, 1.08, 9.41),
+            Vector(0.24, 0.00, 7.81),
+            Vector(18.74, 0.00, 6.07),
+            Vector(8.23, 0.00, -8.88),
+            Vector(-10.26, 0.00, -7.18),
         },
         { -- Leaf
-            Vector(2.26, 1.08, 18.89),
-            Vector(12.96, 1.08, 33.99),
-            Vector(25.89, 0.97, 24.75),
-            Vector(15.37, 1.08, 9.89),
+            Vector(-3.70, 0.00, 2.30),
+            Vector(7.00, 0.00, 17.40),
+            Vector(19.93, -0.11, 8.16),
+            Vector(9.41, 0.00, -6.70),
         },
-        { --Snake
-            Vector(-4.57, 1.08, 7.74),
-            Vector(5.69, 1.08, 22.70),
-            Vector(34.38, 1.08, 35.94),
-            Vector(24.07, 0.97, 20.95),
+        { -- Snake
+            Vector(-10.53, 0.00, -8.85),
+            Vector(-0.27, 0.00, 6.11),
+            Vector(28.42, 0.00, 19.35),
+            Vector(18.11, -0.11, 4.36),
         },
     },
     { -- 5 Player
         { -- Standard
-            Vector(3.48, 0.97, 37.02),
-            Vector(11.17, 0.97, 20.58),
-            Vector(24.14, 0.97, 11.44),
-            Vector(25.50, 0.97, 27.19),
-            Vector(39.86, 0.97, 33.77),
+            Vector(-2.48, -0.11, 20.43),
+            Vector(5.21, -0.11, 3.99),
+            Vector(18.18, -0.11, -5.15),
+            Vector(19.54, -0.11, 10.60),
+            Vector(33.90, -0.11, 17.18),
         },
-        {  -- Snail
-            Vector(6.92, 1.08, 7.77),
-            Vector(13.67, 1.08, 31.04),
-            Vector(28.05, 1.08, 37.81),
-            Vector(26.67, 1.08, 21.91),
-            Vector(25.09, 1.08, 6.09),
+        { -- Snail
+            Vector(0.96, 0.00, -8.82),
+            Vector(7.71, 0.00, 14.45),
+            Vector(22.09, 0.00, 21.22),
+            Vector(20.71, 0.00, 5.32),
+            Vector(19.13, 0.00, -10.50),
         },
         { -- Peninsula
-            Vector(2.23, 1.08, 32.46),
-            Vector(8.96, 1.08, 17.97),
-            Vector(18.13, 1.08, 31.13),
-            Vector(33.19, 1.08, 20.66),
-            Vector(48.18, 1.08, 10.14),
+            Vector(-3.73, 0.00, 15.87),
+            Vector(3.00, 0.00, 1.38),
+            Vector(12.17, 0.00, 14.54),
+            Vector(27.23, 0.00, 4.07),
+            Vector(42.22, 0.00, -6.45),
         },
         { -- V
-            Vector(2.86, 1.08, 29.61),
-            Vector(10.66, 1.08, 13.16),
-            Vector(44.75, 1.08, 34.04),
-            Vector(34.25, 1.08, 19.05),
-            Vector(23.82, 1.08, 4.07),
+            Vector(-3.10, 0.00, 13.02),
+            Vector(4.70, 0.00, -3.43),
+            Vector(38.79, 0.00, 17.45),
+            Vector(28.29, 0.00, 2.46),
+            Vector(17.86, 0.00, -12.52),
         },
     },
     { -- 6 Player
         { -- Standard
-            Vector(4.10, 0.97, 27.34),
-            Vector(10.93, 0.97, 12.98),
-            Vector(19.99, 0.97, 26.09),
-            Vector(34.81, 0.97, 15.37),
-            Vector(43.93, 0.97, 28.38),
-            Vector(50.61, 0.97, 13.86),
+            Vector(-1.86, -0.11, 10.75),
+            Vector(4.97, -0.11, -3.61),
+            Vector(14.03, -0.11, 9.50),
+            Vector(28.85, -0.11, -1.22),
+            Vector(37.97, -0.11, 11.79),
+            Vector(44.65, -0.11, -2.73),
         },
         { -- Star
-            Vector(17.95, 1.08, 34.71),
-            Vector(32.44, 1.08, 41.36),
-            Vector(16.46, 1.08, 18.86),
-            Vector(45.44, 1.08, 32.09),
-            Vector(29.53, 1.08, 9.62),
-            Vector(43.93, 1.08, 16.33),
+            Vector(11.99, 0.00, 18.12),
+            Vector(26.48, 0.00, 24.77),
+            Vector(10.50, 0.00, 2.27),
+            Vector(39.48, 0.00, 15.50),
+            Vector(23.57, 0.00, -6.97),
+            Vector(37.97, 0.00, -0.26),
         },
         { -- Flower
-            Vector(15.89, 1.08, 42.10),
-            Vector(23.54, 1.08, 25.54),
-            Vector(37.99, 1.08, 32.32),
-            Vector(56.13, 1.08, 30.73),
-            Vector(36.67, 1.08, 16.45),
-            Vector(26.17, 1.08, 1.55),
+            Vector(9.93, 0.00, 25.51),
+            Vector(17.58, 0.00, 8.95),
+            Vector(32.03, 0.00, 15.73),
+            Vector(50.17, 0.00, 14.14),
+            Vector(30.71, 0.00, -0.14),
+            Vector(20.21, 0.00, -15.04),
         },
         { -- Caldera
-            Vector(4.79, 1.08, 30.00),
-            Vector(19.28, 1.08, 36.80),
-            Vector(12.49, 1.08, 13.40),
-            Vector(37.37, 1.08, 35.16),
-            Vector(35.92, 1.08, 19.19),
-            Vector(25.51, 1.08, 4.22),
+            Vector(-1.17, 0.00, 13.41),
+            Vector(13.32, 0.00, 20.21),
+            Vector(6.53, 0.00, -3.19),
+            Vector(31.41, 0.00, 18.57),
+            Vector(29.96, 0.00, 2.60),
+            Vector(19.55, 0.00, -12.37),
         },
     },
 }
@@ -3532,37 +3536,37 @@ rotMap = {
 }
 posMapThem = {
     {
-        Vector(-10, 1.06, 10.03), --E
+        Vector(-15.96, -0.02, -6.56), -- E
     },
     {
-        Vector(12.71, 1.06, 10.03), --E
-        Vector(-6.44, 1.06, 8.15), --W
+        Vector(6.75, -0.02, -6.56), -- E
+        Vector(-12.40, -0.02, -8.44), -- W
     },
     {
-        Vector(12.71, 1.06, 10.03), --E
-        Vector(-6.44, 1.06, 8.15), --W
-        Vector(2.06, 1.06, 25.37), --NE
+        Vector(6.75, -0.02, -6.56), -- E
+        Vector(-12.40, -0.02, -8.44), -- W
+        Vector(-3.90, -0.02, 8.78), -- NE
     },
     {
-        Vector(18.71, 1.06, 10.03), --E
-        Vector(-0.44, 1.06, 8.15), --W
-        Vector(8.06, 1.06, 25.37), --NE
-        Vector(-11.21, 1.06, 23.49), --NW
+        Vector(12.75, -0.02, -6.56), -- E
+        Vector(-6.40, -0.02, -8.44), -- W
+        Vector(2.10, -0.02, 8.78), -- NE
+        Vector(-17.17, -0.02, 6.90), -- NW
     },
     {
-        Vector(18.71, 1.06, 25.03), --E
-        Vector(-0.44, 1.06, 23.15), --W
-        Vector(8.06, 1.06, 40.37), --NE
-        Vector(-11.21, 1.06, 38.49), --NW
-        Vector(29.36, 1.06, 9.69), --SE
+        Vector(12.75, -0.02, 8.44), -- E
+        Vector(-6.40, -0.02, 6.56), -- W
+        Vector(2.10, -0.02, 23.78), -- NE
+        Vector(-17.17, -0.02, 21.90), -- NW
+        Vector(23.40, -0.02, -6.90), -- SE
     },
     {
-        Vector(18.71, 1.06, 25.03), --E
-        Vector(-0.44, 1.06, 23.15), --W
-        Vector(8.06, 1.06, 40.37), --NE
-        Vector(-11.21, 1.06, 38.49), --NW
-        Vector(29.36, 1.06, 9.69), --SE
-        Vector(10.33, 1.06, 7.81), --SW
+        Vector(12.75, -0.02, 8.44), -- E
+        Vector(-6.40, -0.02, 6.56), -- W
+        Vector(2.10, -0.02, 23.78), -- NE
+        Vector(-17.17, -0.02, 21.90), -- NW
+        Vector(23.40, -0.02, -6.90), -- SE
+        Vector(4.37, -0.02, -8.78), -- SW
     },
 }
 rotMapThem = {
@@ -3718,7 +3722,7 @@ function BoardCallback(obj,pos,rot)
     obj.interactable = false
     obj.setLock(true)
     obj.setRotationSmooth(rot, false, true)
-    obj.setPositionSmooth(pos, false, true)
+    obj.setPositionSmooth(posOrigin+pos, false, true)
     Wait.condition(function() setupMap(obj) end, function() return obj.resting and not obj.loading_custom end)
 end
 setupMapCoObj = nil
