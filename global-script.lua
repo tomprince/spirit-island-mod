@@ -841,6 +841,26 @@ function onLoad(saved_data)
                 font_size      = 290,
                 tooltip        = "Determines whether to randomly pick a board configuration when game starts",
             })
+            SetupChecker.createButton({ -- index 29
+                click_function = "nullFunc",
+                function_owner = Global,
+                label          = "Board Size",
+                font_color     = {1,1,1},
+                position       = Vector(2.5,0.3,11.5),
+                width          = 0,
+                height         = 0,
+                font_size      = 290,
+            })
+            SetupChecker.createButton({ -- index 48
+                click_function = "toggleScale",
+                function_owner = Global,
+                label          = "Large",
+                position       = Vector(2.5,0.3,12.5),
+                width          = 2000,
+                height         = 600,
+                font_size      = 290,
+                tooltip        = "This scales up the board size.",
+            })
             cleanupTimerId = Wait.time(cleanupAdversary,1,-1)
         end
     end
@@ -1108,6 +1128,20 @@ function alternateSetupButton(_, color, alt_click)
     SetupChecker.editButton({
         index          = 15,
         label          = alternateSetupNames[numPlayers][alternateSetupIndex],
+    })
+end
+function toggleScale(_, color, alt_click)
+    if alt_click then
+        scaleFactorIndex = scaleFactorIndex - 1
+        if scaleFactorIndex == #scaleFactors then
+            scaleFactorIndex = #scaleFactors
+        end
+    else
+        scaleFactorIndex = (scaleFactorIndex % #scaleFactors) + 1
+    end
+    SetupChecker.editButton({
+        index          = 48,
+        label          = scaleFactors[scaleFactorIndex].name
     })
 end
 function toggleBlightCard()
@@ -3290,6 +3324,11 @@ end
 -- The tables below include positions relative to this, in order to
 -- allow scaling the board layouts.
 posOrigin = Vector(5.96, 1.08, 16.59)
+scaleFactors = {
+    {name = "Large", position = 1.09, size = 1.1},
+    {name = "Standard", position = 1, size = 1},
+}
+scaleFactorIndex = 1
 posMap = { -- This order should exactly match alternateSetupNames table
     { -- 1 Player
         { -- Standard
@@ -3722,7 +3761,9 @@ function BoardCallback(obj,pos,rot)
     obj.interactable = false
     obj.setLock(true)
     obj.setRotationSmooth(rot, false, true)
-    obj.setPositionSmooth(posOrigin+pos, false, true)
+    local scaleFactor = scaleFactors[scaleFactorIndex]
+    obj.setPositionSmooth(posOrigin+pos*scaleFactor.position, false, true)
+    obj.scale(scaleFactor.size)
     Wait.condition(function() setupMap(obj) end, function() return obj.resting and not obj.loading_custom end)
 end
 setupMapCoObj = nil
