@@ -1,0 +1,9 @@
+name: 'luacheck'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+inputs:
+  path:
+    description: 'Path to run luacheck in'
+    required: false
+    default: ''
